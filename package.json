@@ -1,0 +1,27 @@
+{
+  "name": "v-dom",
+  "version": "1.0.0",
+  "description": "v-dom practise",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel index.js -d dist",
+    "start": "npm run build && node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevenKirill/v-dom-playground.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stevenKirill/v-dom-playground/issues"
+  },
+  "homepage": "https://github.com/stevenKirill/v-dom-playground#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.0",
+    "@babel/preset-env": "^7.20.2"
+  },
+  "type": "module"
+}
