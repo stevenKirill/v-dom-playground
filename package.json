@@ -2,10 +2,10 @@
   "name": "v-dom",
   "version": "1.0.0",
   "description": "v-dom practise",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
-    "build": "babel index.js -d dist",
-    "start": "npm run build && node dist/index.js"
+    "build": "babel src/app.js --out-dir dist && cp src/vdom.js dist/vdom.js",
+    "lint": "eslint"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,10 @@
   "devDependencies": {
     "@babel/cli": "^7.21.0",
     "@babel/core": "^7.21.0",
-    "@babel/preset-env": "^7.20.2"
+    "@babel/preset-env": "^7.20.2",
+    "eslint": "^8.35.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5"
   },
   "type": "module"
 }
