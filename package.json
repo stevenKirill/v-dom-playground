@@ -4,7 +4,7 @@
   "description": "v-dom practise",
   "main": "src/app.js",
   "scripts": {
-    "build": "babel src/app.js --out-dir dist && cp src/vdom.js dist/vdom.js",
+    "build": "babel src/app.js --out-dir dist && cp src/vdom.js dist/vdom.js&& cp src/stack.js dist/stack.js",
     "lint": "eslint"
   },
   "repository": {

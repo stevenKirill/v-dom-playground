@@ -1,12 +1,15 @@
+import { Stack } from './stack.js';
+
 export const createVNode = (tagName, props = {}, children = []) => ({
   tagName,
   props,
   children,
 });
 
-// TODO как сделать спомощью стека ?
+const stack = new Stack();
+console.log(stack);
+
 export const createDOMNode = (vNode) => {
-  console.log(vNode, '=> vNode');
   if (typeof vNode === 'string') {
     return document.createTextNode(vNode);
   }
@@ -22,4 +25,18 @@ export const createDOMNode = (vNode) => {
     element.appendChild(createDOMNode(child));
   });
   return element;
+};
+
+export const mount = (node, target) => {
+  // eslint-disable-next-line no-param-reassign
+  target.innerHTML = '';
+  target.appendChild(node);
+  return node;
+};
+
+export const patchNode = (node, vNode, nextVNode) => {
+  if (nextVNode === undefined) {
+    node.remove();
+    return;
+  }
 };
