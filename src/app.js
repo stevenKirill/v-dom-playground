@@ -1,16 +1,9 @@
-import {
-  createVNode,
-  createDOMNode,
-  mount,
-  patchNode,
-} from './vdom.js';
+/* eslint-disable no-use-before-define */
+import { createVNode, patch } from './vdom.js';
 
-const appState = {
-  counter: 0,
-};
-const app = document.getElementById('root');
+const createButton = ({ text, onclick }) => createVNode('button', { onclick }, [text]);
 
-const createApp = (state) => {
+function createApp(state) {
   const { counter } = state;
   return createVNode('div', { class: 'container' }, [
     createVNode(
@@ -27,16 +20,44 @@ const createApp = (state) => {
       'img',
       { src: 'https://i.ibb.co/M6LdN5m/2.png', width: 200 },
     ),
+    createVNode('div', {}, [
+      createButton({
+        text: '+1',
+        onclick: () => increment(),
+      }),
+      createButton({
+        text: '-1',
+        onclick: () => decrement(),
+      }),
+    ]),
   ]);
+}
+
+const appState = {
+  state: {
+    counter: 0,
+  },
+  getState() {
+    return this.state;
+  },
+  setState(nextState) {
+    this.state = nextState;
+    this.onStateChangeCallback();
+  },
+  onStateChangeCallback() {},
 };
 
-let virtualApp = createApp(appState);
-let root = mount(createDOMNode(createApp(appState)), app);
+function increment() {
+  return appState.setState({ counter: appState.getState().counter + 1 });
+}
 
-setInterval(() => {
-  appState.counter += 1;
-  const nextApp = createApp(appState);
-  root = patchNode(root, virtualApp, nextApp);
-  virtualApp = nextApp;
-  mount(createDOMNode(createApp(appState)), app);
-}, 1000);
+function decrement() {
+  return appState.setState({ counter: appState.getState().counter - 1 });
+}
+
+let root = patch(createApp(appState.getState()), document.getElementById('root'));
+
+appState.onStateChangeCallback = () => {
+  console.log('state was changed');
+  root = patch(createApp(appState.getState()), root);
+};
