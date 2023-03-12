@@ -3,11 +3,16 @@
 
 const TEXT_NODE_TYPE = 3;
 
-export const createVNode = (tagName, props = {}, children = []) => ({
-  tagName,
-  props,
-  children,
-});
+export const createVNode = (tagName, props = {}, ...children) => {
+  if (typeof tagName === 'function') {
+    return tagName(props, children);
+  }
+  return {
+    tagName,
+    props,
+    children: children.flat(),
+  };
+};
 
 function listener(event) {
   return this[event.type](event);
