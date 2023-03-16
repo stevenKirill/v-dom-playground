@@ -112,3 +112,23 @@ export const patch = (nextVNode, node) => {
   node.v = nextVNode;
   return node;
 };
+
+// export const patchNode = (_node, _vNode, _nextVNode) => {
+//   // первую ноду добавляем в стек
+//   const stack = [{ node: _node, vNode: _vNode, nextVNode: _nextVNode }]
+
+//   // пока стек не пустой
+//   while(stack.length > 0) {
+//     { node, vNode, nextVNode } = stack.pop()
+//     // тут весь код по преобразованию ноды
+
+//     // Вместо вызова patchChildren нужно заполнить стек детьми
+//     // patchChildren(node, vNode.children, nextVNode.children);
+
+//     node.childNodes.forEach((childNode, i) => {
+//       stack.push({ childNode, vChildren[i], nextVChildren[i] });
+//     });
+
+//   }
+//   return _node;
+// };
